@@ -89,14 +89,14 @@ function TabNavigator() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap = 'grid';
 
-          if (route.name === 'Overview') {
+          if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Flashcards') {
-            iconName = focused ? 'book' : 'book-outline';
           } else if (route.name === 'Games') {
             iconName = focused ? 'game-controller' : 'game-controller-outline'; 
-          } else if (route.name === 'Lessons') {
+          } else if (route.name === 'AILessons') {
             iconName = focused ? 'school' : 'school-outline';
+          } else if (route.name === 'Progress') {
+            iconName = focused ? 'analytics' : 'analytics-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;        
@@ -117,10 +117,10 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Overview" component={OverviewTab} />
-      <Tab.Screen name="Flashcards" component={FlashcardsScreen} />
+      <Tab.Screen name="Home" component={OverviewTab} />
       <Tab.Screen name="Games" component={GamesScreen} />
-      <Tab.Screen name="Lessons" component={LessonsTab} />
+      <Tab.Screen name="AILessons" component={LessonsTab} />
+      <Tab.Screen name="Progress" component={ProgressScreen} />
     </Tab.Navigator>
   );
 }

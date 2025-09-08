@@ -116,139 +116,46 @@ export default function LessonsContent() {
     );
   }
 
+  const handleYourLessonsPress = () => {
+    navigation.navigate('YourLessons' as never);
+  };
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header with refresh button */}
+      {/* Create Your Lesson Section - Always at the top */}
+      <View style={styles.card}>
+        <Text style={styles.largeCardTitle}>Create Your First Lesson</Text>
+        <Text style={styles.cardDescription}>
+          Upload PDF course notes to generate an interactive vocabulary lesson
+        </Text>
+        <TouchableOpacity 
+          style={styles.mainCreateButton}
+          onPress={handleCreateLesson}
+        >
+          <Ionicons name="cloud-upload" size={20} color="#ffffff" />
+          <Text style={styles.createButtonText}>Choose PDF File</Text>
+        </TouchableOpacity>
+      </View>
 
-      {lessons.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <Ionicons name="book-outline" size={64} color="#cbd5e1" />
-          <Text style={styles.emptyTitle}>No Lessons Yet</Text>
-          <Text style={styles.emptyText}>
-            Upload a PDF to create your first lesson and start learning English terminology!
-          </Text>
-          
-          {/* AI-Powered Lessons Section */}
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>AI-Powered Vocabulary Lessons</Text>
-            <Text style={styles.cardDescription}>
-              Upload your course notes and let AI create an interactive vocabulary lesson 
-              with flashcards and games. Perfect for learning subject-specific English terminology.
+      {/* Your Lessons Section */}
+      <TouchableOpacity 
+        style={styles.card}
+        onPress={handleYourLessonsPress}
+        activeOpacity={0.7}
+      >
+        <View style={styles.yourLessonsHeader}>
+          <View style={styles.yourLessonsIconContainer}>
+            <Ionicons name="book-outline" size={32} color="#6366f1" />
+          </View>
+          <View style={styles.yourLessonsInfo}>
+            <Text style={styles.yourLessonsTitle}>Your Lessons</Text>
+            <Text style={styles.yourLessonsSubtitle}>
+              {lessons.length === 0 ? 'No lessons yet' : `${lessons.length} lesson${lessons.length === 1 ? '' : 's'} created`}
             </Text>
           </View>
-
-          {/* Create Your Lesson Section */}
-          <View style={styles.card}>
-            <View style={styles.lessonIconContainer}>
-              <Ionicons name="document-text" size={64} color="#6366f1" />
-            </View>
-            <Text style={styles.cardTitle}>Create Your First Lesson</Text>
-            <Text style={styles.cardDescription}>
-              Upload PDF course notes to generate an interactive vocabulary lesson
-            </Text>
-            <TouchableOpacity 
-              style={styles.mainCreateButton}
-              onPress={handleCreateLesson}
-            >
-              <Ionicons name="cloud-upload" size={20} color="#ffffff" />
-              <Text style={styles.createButtonText}>Choose PDF File</Text>
-            </TouchableOpacity>
-          </View>
+          <Ionicons name="chevron-forward" size={20} color="#94a3b8" />
         </View>
-      ) : (
-        <View style={styles.lessonsContainer}>
-          {/* Lessons Header */}
-          <View style={styles.lessonsHeader}>
-            <Text style={styles.lessonsTitle}>{lessons.length} lessons created</Text>
-            <View style={styles.headerButtons}>
-              <TouchableOpacity 
-                style={styles.refreshButton}
-                onPress={fetchUserLessons}
-                disabled={loadingLessons}
-              >
-                <Ionicons 
-                  name="refresh" 
-                  size={16} 
-                  color={loadingLessons ? "#94a3b8" : "#6366f1"} 
-                />
-              </TouchableOpacity>
-              <TouchableOpacity 
-                style={styles.addLessonButton}
-                onPress={handleCreateLesson}
-              >
-                <Ionicons name="add" size={20} color="#ffffff" />
-                <Text style={styles.addLessonButtonText}>New Lesson</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {lessons.map((lesson, index) => (
-            <TouchableOpacity
-              key={lesson.id}
-              style={styles.lessonCard}
-              onPress={() => handleLessonPress(lesson)}
-              activeOpacity={0.7}
-            >
-              {/* Delete Button - Top Right */}
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() => handleDeleteLesson(lesson)}
-                activeOpacity={0.7}
-              >
-                <Ionicons name="trash-outline" size={16} color="#ef4444" />
-              </TouchableOpacity>
-
-              {/* Lesson Header with Icon */}
-              <View style={styles.lessonHeader}>
-                <View style={styles.lessonIconContainer}>
-                  <View style={[
-                    styles.lessonIcon,
-                    { backgroundColor: getSubjectColor(lesson.subject) }
-                  ]}>
-                    <Ionicons name="book-outline" size={20} color="#ffffff" />
-                  </View>
-                </View>
-                <View style={styles.lessonInfo}>
-                  <Text style={styles.lessonTitle} numberOfLines={2}>
-                    {lesson.title}
-                  </Text>
-                  <Text style={styles.lessonDate}>
-                    Created {new Date(lesson.created_at).toLocaleDateString()}
-                  </Text>
-                </View>
-              </View>
-              
-              {/* Lesson Details - Single Line */}
-              <View style={styles.lessonDetails}>
-                <View style={styles.detailItem}>
-                  <Ionicons name="time-outline" size={14} color="#6366f1" />
-                  <Text style={styles.detailText}>{lesson.estimated_duration} min</Text>
-                </View>
-                <View style={styles.detailSeparator} />
-                <View style={styles.detailItem}>
-                  <Ionicons name="trending-up-outline" size={14} color="#6366f1" />
-                  <Text style={styles.detailText}>{lesson.difficulty_level}</Text>
-                </View>
-                <View style={styles.detailSeparator} />
-                <View style={styles.detailItem}>
-                  <Ionicons name="document-text-outline" size={14} color="#6366f1" />
-                  <Text style={styles.detailText} numberOfLines={1}>
-                    {lesson.source_pdf_name}
-                  </Text>
-                </View>
-              </View>
-
-              {/* Progress Bar Placeholder */}
-              <View style={styles.progressContainer}>
-                <View style={styles.progressBar}>
-                  <View style={[styles.progressFill, { width: '0%' }]} />
-                </View>
-                <Text style={styles.progressText}>Not started</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -256,6 +163,7 @@ export default function LessonsContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
   },
   loadingContainer: {
     flex: 1,
@@ -291,7 +199,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
-    padding: 20,
+    padding: 16,
     marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -306,6 +214,40 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#1e293b',
     marginBottom: 12,
+  },
+  largeCardTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1e293b',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  yourLessonsHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  yourLessonsIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#f0f4ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 16,
+  },
+  yourLessonsInfo: {
+    flex: 1,
+  },
+  yourLessonsTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1e293b',
+    marginBottom: 4,
+  },
+  yourLessonsSubtitle: {
+    fontSize: 14,
+    color: '#64748b',
   },
   cardDescription: {
     fontSize: 14,

@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import DailyGoalsWidget from './DailyGoalsWidget';
-import LevelProgressWidget from './LevelProgressWidget';
-import ConversationPracticeCard from './ConversationPracticeCard';
-import AIUsageBar from './AIUsageBar';
+import LearningActivitySequence from './LearningActivitySequence';
 
 interface DashboardContentProps {
   progressData: any;
@@ -11,19 +8,21 @@ interface DashboardContentProps {
 }
 
 export default function DashboardContent({ progressData, loadingProgress }: DashboardContentProps) {
+  const handleActivityPress = (activity: string) => {
+    console.log(`Activity pressed: ${activity}`);
+    // TODO: Navigate to specific activity or show activity details
+  };
+
   return (
     <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-      {/* AI Usage Bar */}
-      <AIUsageBar />
+      {/* Learning Activity Sequence - Repeating structure */}
+      <LearningActivitySequence onActivityPress={handleActivityPress} />
       
-      {/* Conversation Practice Card */}
-      <ConversationPracticeCard />
+      {/* Additional Learning Activity Sequence - Repeat the pattern */}
+      <LearningActivitySequence onActivityPress={handleActivityPress} />
       
-      {/* Daily Goals Widget */}
-      <DailyGoalsWidget />
-      
-      {/* Level Progress Widget */}
-      <LevelProgressWidget />
+      {/* Third Learning Activity Sequence - Continue the pattern */}
+      <LearningActivitySequence onActivityPress={handleActivityPress} />
     </ScrollView>
   );
 }

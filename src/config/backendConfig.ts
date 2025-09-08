@@ -2,8 +2,8 @@
 // This will be updated dynamically when the backend starts
 
 export const BACKEND_CONFIG = {
-  // Auto-detected IP: 172.20.10.8
-  BASE_URL: 'http://172.20.10.8:3001',
+  // Auto-detected IP: 192.168.50.141
+  BASE_URL: 'http://192.168.50.141:3001',
   ENDPOINTS: {
     HEALTH: '/health'
   }

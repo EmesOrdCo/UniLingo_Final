@@ -12,6 +12,7 @@ import ShareInvitationModal from '../components/ShareInvitationModal';
 import ProfileAvatar from '../components/ProfileAvatar';
 import ContactSupportModal from '../components/ContactSupportModal';
 import SubscriptionStatus from '../components/SubscriptionStatus';
+import AIUsageBar from '../components/AIUsageBar';
 
 export default function ProfilePage() {
   const navigation = useNavigation();
@@ -233,6 +234,12 @@ export default function ProfilePage() {
             navigation.navigate('Paywall' as never);
           }}
         />
+
+        {/* AI Usage Section */}
+        <View style={styles.aiUsageSection}>
+          <Text style={styles.sectionTitle}>AI Usage</Text>
+          <AIUsageBar />
+        </View>
 
         {/* Menu Items */}
         <View style={styles.menuSection}>
@@ -648,5 +655,15 @@ const styles = StyleSheet.create({
   },
   orangeText: {
     color: '#f97316',
+  },
+  aiUsageSection: {
+    marginHorizontal: 20,
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1f2937',
+    marginBottom: 12,
   },
 });

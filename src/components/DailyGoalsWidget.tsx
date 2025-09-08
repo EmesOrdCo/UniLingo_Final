@@ -383,14 +383,14 @@ export default function DailyGoalsWidget({ onGoalCompleted }: DailyGoalsWidgetPr
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-    borderRadius: 16,
-    padding: 20,
-    marginVertical: 10,
+    borderRadius: 12,
+    padding: 16,
+    marginVertical: 8,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
   },
   header: {
     flexDirection: 'row',

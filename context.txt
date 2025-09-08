@@ -1,0 +1,38 @@
+Mission: I’m creating v2 of the app’s UI. Preserve all existing functionality and behavior. I only want layout/visual changes and minor refactors that don’t alter runtime logic.
+Scope
+✅ Allowed: visual/layout changes, responsive tweaks, styling refactors, component extraction, semantic markup/accessibility improvements, dead-CSS cleanup, renaming style variables, snapshot updates that reflect visual changes only.
+❌ Not allowed: changing business logic, auth/session flows, data fetching/mutations, navigation routes/params, analytics/event names, API contracts, DB schema, environment variables, feature flags, or any copy that alters meaning.
+Invariants (do not break)
+Auth: Email/SMS OTP flow with Supabase must remain identical (send → verify → session → upsert profile).
+State: Keep state shape, Redux/Zustand/Context atoms/selectors, and AsyncStorage keys unchanged.
+Types: Preserve TypeScript interfaces/types and function signatures used outside the edited file.
+Navigation: Keep route names, params, deep links/schemes, and stack/tab structure as-is.
+Data/IO: Don’t change API endpoints, Supabase queries, RLS assumptions, or error handling paths.
+Testing hooks: Keep testID/data-testid and analytics event names.
+i18n/Copy: Don’t change i18n keys; you may rearrange where strings render.
+Filesystem: Don’t move files or change import paths unless you auto-update all references safely.
+Styling & Layout Rules
+Use the existing design system/theming approach (e.g., StyleSheet/theme/tokens). Don’t introduce a new UI library.
+Aim for clean hierarchy: container → section → card → content. Prefer flex/grid patterns already used in the codebase.
+Improve spacing, alignment, and typography; keep component props/ids identical.
+Ensure A11y: proper roles/labels, tap targets ≥ 44px, readable contrast, focus order intact.
+Refactor Guardrails
+Pure refactors only: component extraction, prop drilling reduction, memoization without changing behavior.
+If a change might affect behavior, stop and leave a // TODO(@cursor): potential behavior change with a short note instead of applying it.
+Performance
+Avoid unnecessary re-renders (memo/useCallback where it doesn’t change semantics).
+Don’t introduce heavy dependencies. No network timing changes or retry policy edits.
+Acceptance Criteria
+All existing tests pass (unit/e2e). Only visuals/snapshots may update.
+No console errors/warnings introduced.
+App boots and auth + onboarding + home flows are identical functionally.
+Lint/TypeScript clean.
+Output Format
+Provide minimal diffs.
+Start with a brief summary: what changed visually, why it’s safe.
+Include a concise commit message: chore(ui): refresh [screen/component] layout without logic changes.
+Targets to Tidy (if present)
+Convert deeply nested inline styles into small styled subcomponents.
+Normalize spacing to existing scale (e.g., 4/8).
+Replace one-off colors with theme tokens.
+Preserve IDs/props even when rearranging component trees.
